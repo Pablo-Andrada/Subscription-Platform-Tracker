@@ -21,7 +21,7 @@ const FormAddSubs = ({ setType, setPrice, type, price }) => {
             <h3>Agregar suscripciones</h3>
             <form onSubmit={handleSubs}>
                 <p>Servicio</p>
-                <select onChange={e=> setType(e.target.value) }>
+                <select onChange={e => setType(e.target.value)}>
                     <option value="">-- Elegir --</option>
                     <option value="netflix">Netflix</option>
                     <option value="disneyPlus">Disney Plus</option>
@@ -34,7 +34,7 @@ const FormAddSubs = ({ setType, setPrice, type, price }) => {
                 </select>
                 <p>Cantidad</p>
                 <input type="number" placeholder="20$" onChange={e => setPrice(e.target.value)} />
-                <input type="submit" value="Agregar"/>
+                <input type="submit" value="Agregar" />
             </form>
             {error ? <p className="error">Campos invalidos</p> : null}
         </div>
