@@ -18,6 +18,6 @@ const MainControl = ({ count }) => {
                 price={price}
             />
         </div>
-    );
+    )
 }
 export default MainControl;
