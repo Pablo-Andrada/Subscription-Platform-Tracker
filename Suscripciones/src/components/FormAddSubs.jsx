@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs }) => {
+const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs,editId,setEditId }) => {
     const [error, setError] = useState(false);
 
 
@@ -11,12 +11,25 @@ const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs }) => {
             return;
         }
         setError(false);
-        const data = {
-            type: type,
-            price: price,
-            id: Date.now()
+        if (editId != "") {
+            setEditId("");
+            const newSubs = subs.map(item => {
+                if (item.id === editId) {
+                    item.type = type;
+                    item.price = price;
+                }
+                return item;
+            })
+            setSubs(newSubs);
+        } else {
+            const data = {
+                type: type,
+                price: price,
+                id: Date.now()
+            }
+            setSubs([...subs, data]);
         }
-        setSubs([...subs, data]);
+      
         setType("");
         setPrice("");
 
@@ -45,7 +58,10 @@ const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs }) => {
                 </select>
                 <p>Cantidad</p>
                 <input type="number" placeholder="20$" onChange={e => setPrice(e.target.value)} value={price} />
-                <input type="submit" value="Agregar" />
+                {editId != "" ?
+                    <input type="submit" value="Guardar" />
+                    : <input type="submit" value="Agregar" />}
+                
             </form>
             {error ? <p className="error">Campos invalidos</p> : null}
         </div>
