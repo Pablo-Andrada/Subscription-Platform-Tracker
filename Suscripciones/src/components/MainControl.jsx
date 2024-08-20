@@ -9,7 +9,8 @@ const MainControl = ({ count }) => {
     const [price, setPrice] = useState("");
     const [subs, setSubs] = useState([]);
     const [editId, setEditId] = useState("");
-    
+    const [spent, setSpent] = useState(0);
+
     const eliminarItem = id => {
         const newList = subs.filter(item => item.id != id);
         setSubs(newList);
@@ -28,7 +29,12 @@ const MainControl = ({ count }) => {
     return (
         < >
             <div className="main-form">
-                <Balance count={count} />;
+                <Balance
+                    count={count}
+                    subs={subs}
+                    spent={spent}
+                    setSpent={setSpent}
+                />;
                 <FormAddSubs
                     setType={setType}
                     setPrice={setPrice}
@@ -38,6 +44,8 @@ const MainControl = ({ count }) => {
                     subs={subs}
                     editId={editId}
                     setEditId={setEditId}
+                    spent={spent}
+                    count={count}
                 />
             </div>
             <Displayitems subs={subs} eliminarItem={eliminarItem} editItem={editItem} />

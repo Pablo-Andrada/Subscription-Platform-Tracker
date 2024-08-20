@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs,editId,setEditId }) => {
+const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs,editId,setEditId,spent,count }) => {
     const [error, setError] = useState(false);
+    const [errorMoney, setErrorMoney] = useState(false);
+
 
 
     const handleSubs = e => {
@@ -10,7 +12,12 @@ const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs,editId,setEd
             setError(true);
             return;
         }
+        if (count - spent < Number(price)) {
+            setErrorMoney(true);
+            return;
+        }
         setError(false);
+        setErrorMoney(false);
         if (editId != "") {
             setEditId("");
             const newSubs = subs.map(item => {
@@ -64,6 +71,8 @@ const FormAddSubs = ({ setType, setPrice, type, price, setSubs,subs,editId,setEd
                 
             </form>
             {error ? <p className="error">Campos invalidos</p> : null}
+            {errorMoney ? <p className="error">No tienes presupuesto</p> : null}
+
         </div>
     );
 
